@@ -2,7 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-  
+html,body,main{
+  height: 100%;
+}
+
+main{
+  display: flex;
+  flex-direction: column;
+}
 
 @layer base {
   :root {

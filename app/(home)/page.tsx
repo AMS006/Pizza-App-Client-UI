@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import ProductList from "./components/product-list";
 import { Suspense } from "react";
+import CategoryList from "./components/category-list";
 
 export default function Home({ searchParams }: { searchParams: { restaurantId: string } }) {
   console.log(searchParams.restaurantId, "Rresturant id");
@@ -28,7 +29,7 @@ export default function Home({ searchParams }: { searchParams: { restaurantId: s
 
       </section>
       <Suspense fallback={<div>Loading...</div>}>
-        <ProductList searchParams={searchParams} />
+        <CategoryList searchParams={searchParams} />
       </Suspense>
     </>
   );

@@ -3,20 +3,14 @@ import { useEffect, useState } from "react"
 import ToppingCard from "./topping-card"
 import { useSearchParams } from "next/navigation"
 
+interface ToppingListProps {
+    selectedToppings: Topping[]
+    onToppingSelect: (topping: Topping) => void
+}
+const ToppingList = ({ selectedToppings, onToppingSelect }: ToppingListProps) => {
 
-
-const ToppingList = () => {
-    const [selectedToppings, setSelectedToppings] = useState<Topping[]>([])
     const searchParams = useSearchParams();
     const [toppings, setToppings] = useState<Topping[]>([])
-
-    const onToppingSelect = (topping: Topping) => {
-        if (selectedToppings.includes(topping)) {
-            setSelectedToppings(selectedToppings.filter((selectedTopping) => selectedTopping._id !== topping._id))
-        } else {
-            setSelectedToppings([...selectedToppings, topping])
-        }
-    }
 
     useEffect(() => {
         const fetchToppings = async () => {

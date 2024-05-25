@@ -44,3 +44,26 @@ interface ProductPriceConfiguration {
         };
     };
 }
+
+interface LoginUserData {
+    email: string;
+    password: string;
+}
+
+interface RegisterUserData {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+}
+
+interface AddressType {
+    name: string;
+    mobile: string;
+    house: string;
+    area: string;
+    landmark?: string;
+    pincode: string;
+    city: string;
+    state: string;
+}
