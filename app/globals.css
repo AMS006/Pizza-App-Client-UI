@@ -11,6 +11,37 @@ main{
   flex-direction: column;
 }
 
+
+.rc-steps-item-process .rc-steps-item-icon {
+  background:#f97316 !important;
+  border-color: #fff !important;
+}
+
+.rc-steps-item-finish .rc-steps-item-icon {
+  
+  border-color: #f97316!important;
+}
+
+.rc-steps-item-wait .rc-steps-item-icon {
+ 
+  border-color: #f97316 !important;
+}
+
+.rc-steps-item-finish .rc-steps-item-icon {
+ 
+  border-color: #f97316 !important;
+}
+
+.rc-steps-item-finish .rc-steps-item-icon {
+ 
+  border-color: #f97316 !important;
+}
+
+.rc-steps-item-finish .rc-steps-item-tail:after {
+  background: #f97316 !important;
+}
+
+
 @layer base {
   :root {
     --background: 15, 33%, 98%;

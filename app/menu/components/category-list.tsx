@@ -2,10 +2,13 @@ import React from 'react'
 import ProductCard from './product-card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import ProductList from './product-list'
+import { Input } from '@/components/ui/input'
+import { Search } from 'lucide-react'
 
 interface CategoryListProps {
     searchParams: {
         restaurantId: string
+        search: string
     }
 }
 const CategoryList = async ({ searchParams }: CategoryListProps) => {
@@ -25,14 +28,18 @@ const CategoryList = async ({ searchParams }: CategoryListProps) => {
     return (
         <section >
             <div className='container py-8'>
+
                 <Tabs defaultValue={categories.data[0].name}>
-                    <TabsList className='mb-6' >
-                        {categories.data.map((category: Category) => (
-                            <TabsTrigger key={category._id} value={category.name}>
-                                {category.name}
-                            </TabsTrigger>
-                        ))}
-                    </TabsList>
+                    <div className='flex justify-between items-center'>
+
+                        <TabsList className='mb-6' >
+                            {categories.data.map((category: Category) => (
+                                <TabsTrigger key={category._id} value={category.name}>
+                                    {category.name}
+                                </TabsTrigger>
+                            ))}
+                        </TabsList>
+                    </div>
                     {categories.data.map((category: Category) => (
                         <TabsContent key={category._id} value={category.name}>
                             <ProductList categoryId={category._id} searchParams={searchParams} />

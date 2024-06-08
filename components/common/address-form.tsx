@@ -33,9 +33,8 @@ import { addAddress } from '@/api/http';
 const addressSchema = z.object({
     name: z.string({ message: "Name is required" }),
     mobile: z.string({ message: "Mobile number is required" }).regex(/^\d{10}$/, "Mobile number must be 10 digits"),
-    house: z.string({ message: "House Number is required" }),
-    area: z.string({ message: "Street is required" }),
-    landmark: z.string().optional(),
+    addressLine1: z.string({ message: "Address Line 1 is required" }),
+    addressLine2: z.string().optional(),
     city: z.string({ message: "City is required" }),
     state: z.string({ message: "State is required" }).min(1, { message: "State is required" }),
     pincode: z.string({ message: "Pincode is required" }).regex(/^\d{6}$/, "Pincode must be 6 digits"),
@@ -62,15 +61,15 @@ const AddressForm = ({ setModalOpen }: AddressFormProps) => {
         },
     })
 
-    const onSubmit = (data: AddressType) => {
+    const onSubmit = (data: z.infer<typeof addressSchema>) => {
         console.log(data);
-        mutate(data);
+        mutate({ ...data, _id: "none" });
     };
 
 
 
     return (
-        <Card className='w-full overflow-y-auto h-[calc(100vh+10px)]'>
+        <Card className='w-full overflow-y-auto '>
             <CardHeader className='text-xl font-bold'>Add Address</CardHeader>
             <Form {...form} >
                 <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -110,12 +109,12 @@ const AddressForm = ({ setModalOpen }: AddressFormProps) => {
 
                         <FormField
                             control={form.control}
-                            name="house"
+                            name="addressLine1"
                             render={({ field }) => (
                                 <FormItem className='flex flex-col gap-0'>
-                                    <FormLabel htmlFor="house">Flat, House no, Building, Company, Apartment</FormLabel>
+                                    <FormLabel htmlFor="addressLine1">Address Line 1</FormLabel>
                                     <FormControl>
-                                        <Input id="house" {...field} />
+                                        <Input id="addressLine1" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -125,12 +124,12 @@ const AddressForm = ({ setModalOpen }: AddressFormProps) => {
 
                         <FormField
                             control={form.control}
-                            name="area"
+                            name="addressLine2"
                             render={({ field }) => (
                                 <FormItem className='flex flex-col gap-0'>
-                                    <FormLabel htmlFor="street">Area, Street, Sector, Village</FormLabel>
+                                    <FormLabel htmlFor="addressLine2">Address Line 2</FormLabel>
                                     <FormControl>
-                                        <Input id="street" {...field} />
+                                        <Input id="addressLine2" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -138,20 +137,6 @@ const AddressForm = ({ setModalOpen }: AddressFormProps) => {
                         />
 
 
-                        <FormField
-                            control={form.control}
-                            name="landmark"
-                            render={({ field }) => (
-                                <FormItem className='flex flex-col gap-0'>
-                                    <FormLabel htmlFor="landmark">Landmark</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder='E.g. near apollo hospital' id="landmark" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        >
-                        </FormField>
 
 
                         <div className='grid grid-cols-2 gap-2.5'>

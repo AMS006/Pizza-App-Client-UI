@@ -3,7 +3,8 @@ import React, { use, useEffect } from 'react'
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { MdLocationPin } from "react-icons/md";
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import path from 'path';
 
 interface AddressModalProps {
     tenants: Tenant[];
@@ -17,10 +18,13 @@ const AddressModal = ({ tenants }: AddressModalProps) => {
     const [defaultAddress, setDefaultAddress] = React.useState<string>('');
     const router = useRouter();
     const pathname = usePathname();
+    const searchParams = useSearchParams();
 
-
+    console.log(pathname, "Pathname");
+    console.log((searchParams.get('redirect')), "Search Params");
 
     useEffect(() => {
+
         const selectedAddress = JSON.parse(localStorage.getItem('selectedTenant') || 'null');
         console.log(selectedAddress);
         setMounted(true);
@@ -32,10 +36,18 @@ const AddressModal = ({ tenants }: AddressModalProps) => {
         setSelectedAddress(selectedAddress?.address as string);
         setDefaultAddress(selectedAddress?.id as string);
 
+        if (searchParams.get('redirect')) {
+            return;
+        }
 
-        router.push(`?restaurantId=${selectedAddress?.id}`);
+        const search = searchParams.get('search')
+        if (search)
+            router.push(`?restaurantId=${selectedAddress?.id}&search=${search}`);
+        else
+            router.push(`?restaurantId=${selectedAddress?.id}`);
 
-    }, [router]);
+
+    }, [router, searchParams]);
 
 
 

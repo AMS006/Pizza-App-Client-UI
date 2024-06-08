@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import ProductList from "./components/product-list";
-import { Suspense } from "react";
-import CategoryList from "./components/category-list";
+import { ArrowBigRight } from 'lucide-react'
+import Link from "next/link";
 
-export default function Home({ searchParams }: { searchParams: { restaurantId: string } }) {
-  console.log(searchParams.restaurantId, "Rresturant id");
+export default function Home() {
+
   return (
     <>
       <section className="bg-white">
@@ -19,7 +18,10 @@ export default function Home({ searchParams }: { searchParams: { restaurantId: s
               Enjoy a Free Meal if Your Order Takes More Than 45 Minutes!
             </p>
             <Button className="mt-8 text-lg rounded-full py-7 px-6 font-bold">
-              Get your pizza now
+              <Link href="/menu">
+                Order Now
+              </Link>
+              <ArrowBigRight className="ml-4" size={24} />
             </Button>
           </div>
           <div>
@@ -28,9 +30,7 @@ export default function Home({ searchParams }: { searchParams: { restaurantId: s
         </div>
 
       </section>
-      <Suspense fallback={<div>Loading...</div>}>
-        <CategoryList searchParams={searchParams} />
-      </Suspense>
+
     </>
   );
 }

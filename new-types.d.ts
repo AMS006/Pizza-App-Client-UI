@@ -58,12 +58,61 @@ interface RegisterUserData {
 }
 
 interface AddressType {
+    _id: string;
     name: string;
     mobile: string;
-    house: string;
-    area: string;
-    landmark?: string;
+    addressLine1: string;
+    addressLine2?: string;
     pincode: string;
     city: string;
     state: string;
+    userId?: string;
+}
+
+interface OrderItemType {
+    _id: string;
+    qty: number;
+    totalPrice: number;
+    hash: string;
+    image: string;
+    name: string;
+    chosenConfiguration: {
+        priceConfiguration: {
+            [key: string]: string;
+        };
+        selectedToppings: Topping[];
+    };
+    priceConfiguration: {
+        [key: string]: {
+            priceType: 'base' | 'aditional';
+            availableOptions: {
+                [key: string]: number;
+            };
+        };
+    };
+}
+
+interface OrderType {
+    _id?: string;
+    orderId?: string;
+    orderDate?: Date;
+    orderItems: OrderItemType[];
+    paymentMethod: string;
+    restaurantId: string;
+    restaurantName: string;
+    addressId: string;
+    userEmail: string;
+    comment?: string;
+    paymentStatus: string;
+    orderAmount: number;
+    customerName: string;
+    discountPercent?: number;
+    orderStatus?: string;
+    address?: AddressType;
+    isConfirmed?: boolean;
+    isDelivered?: boolean;
+    deliveryDate?: Date;
+    isCancelled?: boolean;
+    cancelDate?: Date;
+    cancelReason?: string;
 }

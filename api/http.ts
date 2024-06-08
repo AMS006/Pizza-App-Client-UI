@@ -1,6 +1,7 @@
 import { api } from "./api-client";
 
 export const AUTH_SERVICE = '/api/auth';
+export const ORDER_SERVICE = '/api/order';
 
 
 export const login = async (userData: LoginUserData) => {
@@ -20,9 +21,30 @@ export const getSelf = async () => {
 }
 
 export const getAddress = async () => {
-    return await api.get(`${AUTH_SERVICE}/users/address`);
+    return await api.get(`${ORDER_SERVICE}/address`);
 }
 
 export const addAddress = async (address: AddressType) => {
-    return await api.post(`${AUTH_SERVICE}/users/address`, address);
+    return await api.post(`${ORDER_SERVICE}/address`, address);
 }
+
+// Orders
+
+export const placeOrder = async (order: OrderType) => {
+    return await api.post(`${ORDER_SERVICE}/order`, order);
+}
+
+export const validateCoupon = async (couponCode: string) => {
+
+    return await api.post(`${ORDER_SERVICE}/coupon/apply`, { couponCode });
+}
+
+export const getUserOrders = async () => {
+    return await api.get(`${ORDER_SERVICE}/order/user`);
+}
+
+export const cancelOrder = async (id: string, cancelReason: string) => {
+    return await api.post(`${ORDER_SERVICE}/order/cancel/${id}`, { cancelReason });
+}
+
+// export const searchProduct = async (id: string,)

@@ -46,7 +46,7 @@ const UserAvatar = () => {
                                     <CgProfile className="mr-2" />
                                     Profile
                                 </Link>
-                                <Link href={'/'} className="flex items-center hover:bg-slate-200 w-full py-1.5 px-2.5 rounded">
+                                <Link href={'/orders'} className="flex items-center hover:bg-slate-200 w-full py-1.5 px-2.5 rounded">
                                     <BsCart4 className="mr-2" />
                                     Orders
                                 </Link>

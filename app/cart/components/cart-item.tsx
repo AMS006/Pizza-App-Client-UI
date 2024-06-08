@@ -20,8 +20,6 @@ const CartItem = ({ item }: { item: Item }) => {
 
     const removeFromCart = () => {
         dispatch(removeItem(item.hash))
-
-
     }
 
     return (

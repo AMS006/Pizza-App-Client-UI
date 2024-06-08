@@ -15,12 +15,13 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { login, logout } from '@/api/http'
-import { useRouter } from 'next/navigation'
-import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useAppDispatch } from '@/lib/redux/hooks'
 import { setUser } from '@/lib/redux/features/user/userSlice'
 import { useToast } from '@/components/ui/use-toast'
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { useIsLoggedIn } from '@/app/hooks'
+import LoadingButton from '@/components/common/loading-button'
 
 const formSchema = z.object({
     email: z.string({ message: "Email is Required" }).email("Invalid email address"),
@@ -32,7 +33,8 @@ const LoginForm = () => {
     const dispatch = useAppDispatch();
     const { toast } = useToast();
     const isLoggedIn = useIsLoggedIn();
-    console.log(isLoggedIn)
+    const searchParams = useSearchParams();
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
     });
@@ -47,9 +49,13 @@ const LoginForm = () => {
                 await logout();
                 return;
             }
-            // redirect to the dashboard
-            router.push('/');
+            const redirect = searchParams.get('redirect');
             dispatch(setUser(data));
+            if (redirect) {
+                router.push(redirect);
+            } else {
+                router.push('/');
+            }
         } catch (error) {
             toast({
                 variant: "destructive",
@@ -61,7 +67,12 @@ const LoginForm = () => {
     }
 
     if (isLoggedIn) {
-        router.push('/')
+        if (searchParams.get('redirect') !== null) {
+            router.push(searchParams.get('redirect') || '/');
+        }
+        else {
+            router.push('/')
+        }
     }
 
     return (
@@ -103,7 +114,7 @@ const LoginForm = () => {
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className='w-full'>Login</Button>
+                <LoadingButton loading={form.formState.isSubmitting} text='Login' variant='default' onClick={() => { }} type='submit' className='w-full' />
             </form>
         </Form>
     )
