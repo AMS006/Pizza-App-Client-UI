@@ -22,7 +22,6 @@ import {
     SelectContent,
     SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
@@ -35,6 +34,7 @@ import { z } from 'zod'
 import LoadingButton from '@/components/common/loading-button'
 import { cn } from '@/lib/utils'
 import Tag from '@/components/common/tag'
+import { ReviewModal } from './review-modal'
 
 const cancellationReasons = [
     'I placed the order by mistake',
@@ -81,8 +81,9 @@ const OrderDetails = () => {
 
     return (
         <Card className='w-2/3'>
-            <CardHeader>
+            <CardHeader className='flex flex-row items-center justify-between w-full'>
                 <h1 className='font-bold text-xl '>Order Details</h1>
+                {!selectedOrder?.isReviewAdded && <ReviewModal />}
             </CardHeader>
 
             <CardContent>

@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ArrowBigRight } from 'lucide-react'
 import Link from "next/link";
+import Testimonials from "./components/testimonials";
+import Accordians from "./components/accordians";
 
 export default function Home() {
 
@@ -28,7 +30,11 @@ export default function Home() {
             <Image alt="pizza-main" src={'/pizza-main.png'} width={400} height={400} />
           </div>
         </div>
-
+        <div>
+          <h1 className="text-4xl font-bold text-center py-4 text-primary">Testimonials</h1>
+          <Testimonials />
+        </div>
+        <Accordians />
       </section>
 
     </>

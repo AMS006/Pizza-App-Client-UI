@@ -183,12 +183,12 @@ const ProductModal = ({ product }: ProductModalProps) => {
                             })
                         }
 
-                        <div>
+                        {product?.isToppingAvailable && <div>
                             <h3>Extra Toppings</h3>
                             <Suspense fallback={<div>Loading...</div>}>
                                 <ToppingList selectedToppings={selectedToppings} onToppingSelect={onToppingSelect} />
                             </Suspense>
-                        </div>
+                        </div>}
                         <div className="flex justify-between items-center">
                             <span className="font-semibold">₹{totalPrice}</span>
                             <Button

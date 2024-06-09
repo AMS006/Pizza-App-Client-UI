@@ -7,6 +7,7 @@ interface Product {
     categoryId: string;
     category: Category
     priceConfiguration: ProductPriceConfiguration
+    isToppingAvailable: boolean;
 }
 
 interface Topping {
@@ -115,4 +116,15 @@ interface OrderType {
     isCancelled?: boolean;
     cancelDate?: Date;
     cancelReason?: string;
+    isReviewAdded?: boolean;
+}
+
+interface ReviewType {
+    _id?: string;
+    userId?: string;
+    userName: string;
+    orderId?: string;
+    review: string;
+    rating: number;
+    restaurantId: string;
 }

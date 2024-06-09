@@ -27,14 +27,14 @@ const ProductList = async ({ searchParams, categoryId }: ProductListProps) => {
 
     return (
         <div>
-            <SearchProduct categoryId='' />
+            <SearchProduct />
             {products?.length !== 0 ? <div className='grid grid-cols-4 gap-4 my-4'>
                 {products.map((product: Product) => (
                     <ProductCard key={product._id} product={product} />
                 ))}
             </div> :
                 <div className='text-center mt-6'>
-                    <p className=' text-gray-500'>No Products Found</p>
+                    <p className=' text-gray-500'>No Items Found</p>
                 </div>}
         </div>
     )

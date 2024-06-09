@@ -10,6 +10,9 @@ main{
   display: flex;
   flex-direction: column;
 }
+section{
+  flex-grow: 1;
+}
 
 
 .rc-steps-item-process .rc-steps-item-icon {

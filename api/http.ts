@@ -47,4 +47,12 @@ export const cancelOrder = async (id: string, cancelReason: string) => {
     return await api.post(`${ORDER_SERVICE}/order/cancel/${id}`, { cancelReason });
 }
 
+export const addReview = async (review: ReviewType) => {
+    return await api.post(`${ORDER_SERVICE}/review`, review);
+}
+
+export const getTopReviews = async () => {
+    return await api.get(`${ORDER_SERVICE}/review/top`);
+}
+
 // export const searchProduct = async (id: string,)
